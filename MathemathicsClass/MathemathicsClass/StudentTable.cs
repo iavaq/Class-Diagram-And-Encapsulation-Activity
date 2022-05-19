@@ -10,7 +10,7 @@ namespace MathemathicsClass
     public class StudentTable
     {
         public enum Grades {F, E, D, C, B, A}
-        public static IEnumerable<int> Groups = Enumerable.Range(1, 5);
-            
+        public static List<int> Groups = Enumerable.Range(1, 5).ToList();
+
     }
 }

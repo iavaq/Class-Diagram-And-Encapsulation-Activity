@@ -16,7 +16,7 @@ namespace MathemathicsClass
 
         public Student(string name, char grade, int group)
         {
-            if (!Enum.IsDefined(typeof(StudentTable.Grades), char.ToUpper(grade).ToString()))
+            if (!Enum.IsDefined(typeof(StudentTable.Grades), grade.ToString().ToUpper()))
             {
                 throw new Exception("Invalid grade. Please enter a valid student grade. ");
             }
@@ -43,7 +43,6 @@ namespace MathemathicsClass
 
         private void updateGrade(int level)
         {
-            
             int newGrade = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), ((char)Grade).ToString()) + level;
             Grade = (StudentTable.Grades)(newGrade);
         }
