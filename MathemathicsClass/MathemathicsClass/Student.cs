@@ -16,17 +16,19 @@ namespace MathemathicsClass
 
         public Student(string name, string grade, string group)
         {
-            //Object[] inputs = new Object[] { name, grade, group };
-            //nullChecker(inputs);
-
-            if (!Enum.IsDefined(typeof(StudentTable.Grades), grade.ToUpper()))
+            if (nullChecker(name))
             {
-                throw new ArgumentOutOfRangeException("Invalid grade. Please enter a valid student grade. ");
+                throw new ArgumentNullException();
             }
 
-            if (!Enum.IsDefined(typeof(StudentTable.Groups),Int32.Parse(group)))
+            if (!checkGradeRange(grade))
             {
-                throw new ArgumentOutOfRangeException("Invalid group. Please enter a valid student group. ");
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if (!checkGroupRange(group))
+            {
+                throw new ArgumentOutOfRangeException();
             }
 
             Name = name;
@@ -46,18 +48,34 @@ namespace MathemathicsClass
 
         private void updateGrade(int level)
         {
-            int newGrade = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), Grade.ToString()) + level;
-            Grade = (StudentTable.Grades)(newGrade);
+
+            int newLevel = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), Grade.ToString()) + level;
+
+            if (checkGradeRange(((StudentTable.Grades)newLevel).ToString()))
+            {
+                Grade = (StudentTable.Grades)newLevel;
+            }
+            else
+            {
+                Console.WriteLine("New grade is out of range. Enter valid grade.");
+            }
+        }
+        
+
+        private bool nullChecker(string input)
+        {
+            return (string.IsNullOrEmpty(input.Trim()));
+          
+        }
+        private bool checkGradeRange(string grade)
+        {
+            return (Enum.IsDefined(typeof(StudentTable.Grades), grade.ToUpper()));
             
         }
-
-        /*
-        private void nullChecker(Object[] inputs)
+        private bool checkGroupRange(string group)
         {
-            foreach (Object[] input in inputs)
-            {
-                //ArgumentNullException.ThrowIfNull(input.);
-            }
-        }*/
+            return (Enum.IsDefined(typeof(StudentTable.Groups), Int32.Parse(group)));
+           
+        }
     }
 }
