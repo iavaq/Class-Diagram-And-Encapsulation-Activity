@@ -1,5 +1,5 @@
 using FluentAssertions;
-using MathemathicsClass;
+using MathemathicsClass.Models;
 
 namespace MathematicsClassTests
 {

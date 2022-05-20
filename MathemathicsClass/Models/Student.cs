@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathemathicsClass
+namespace MathemathicsClass.Models
 {
     public class Student
     {
@@ -12,7 +12,6 @@ namespace MathemathicsClass
         public StudentTable.Grades Grade { get; private set; }
         private StudentTable.Groups _group;
         private string _secretNickName = "MySecretNickName";
-        
 
         public Student(string name, string grade, string group)
         {
@@ -48,7 +47,6 @@ namespace MathemathicsClass
 
         private void updateGrade(int level)
         {
-
             int newLevel = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), Grade.ToString()) + level;
 
             if (checkGradeRange(((StudentTable.Grades)newLevel).ToString()))
@@ -60,22 +58,21 @@ namespace MathemathicsClass
                 Console.WriteLine("New grade is out of range. Enter valid grade.");
             }
         }
-        
 
         private bool nullChecker(string input)
         {
-            return (string.IsNullOrEmpty(input.Trim()));
-          
+            return string.IsNullOrEmpty(input.Trim());
+
         }
         private bool checkGradeRange(string grade)
         {
-            return (Enum.IsDefined(typeof(StudentTable.Grades), grade.ToUpper()));
-            
+            return Enum.IsDefined(typeof(StudentTable.Grades), grade.ToUpper());
+
         }
         private bool checkGroupRange(string group)
         {
-            return (Enum.IsDefined(typeof(StudentTable.Groups), Int32.Parse(group)));
-           
+            return Enum.IsDefined(typeof(StudentTable.Groups), int.Parse(group));
+
         }
     }
 }
