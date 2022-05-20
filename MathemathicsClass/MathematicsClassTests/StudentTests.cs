@@ -13,21 +13,13 @@ namespace MathematicsClassTests
         [Test]
         public void Test1()
         {
-            string name = "A Student";
-            char grade = 'B';
-            int group = 3;
-
-            Student aStudent = new Student(name, grade, group);
+            Student aStudent = new Student("A name", "B", "3");
         }
 
         [Test]
         public void Test2()
         {
-            string name = "A Student";
-            char grade = 'B';
-            int group = 3;
-
-            Student aStudent = new Student(name, grade, group);
+            Student aStudent = new Student("A name", "B", "3");
 
             aStudent.Upgrade();
             aStudent.Grade.Should().Be(StudentTable.Grades.A);
@@ -36,11 +28,7 @@ namespace MathematicsClassTests
         [Test]
         public void Test3()
         {
-            string name = "A Student";
-            char grade = 'B';
-            int group = 3;
-
-            Student aStudent = new Student(name, grade, group);
+            Student aStudent = new Student("A name", "B", "3");
 
             aStudent.Downgrade();
             aStudent.Grade.Should().Be(StudentTable.Grades.C);

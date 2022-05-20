@@ -10,25 +10,28 @@ namespace MathemathicsClass
     {
         public string Name { get; private set; }
         public StudentTable.Grades Grade { get; private set; }
-        private int _group;
+        private StudentTable.Groups _group;
         private string _secretNickName = "MySecretNickName";
+        
 
-
-        public Student(string name, char grade, int group)
+        public Student(string name, string grade, string group)
         {
-            if (!Enum.IsDefined(typeof(StudentTable.Grades), grade.ToString().ToUpper()))
+            //Object[] inputs = new Object[] { name, grade, group };
+            //nullChecker(inputs);
+
+            if (!Enum.IsDefined(typeof(StudentTable.Grades), grade.ToUpper()))
             {
-                throw new Exception("Invalid grade. Please enter a valid student grade. ");
+                throw new ArgumentOutOfRangeException("Invalid grade. Please enter a valid student grade. ");
             }
 
-            if (!StudentTable.Groups.Contains(group))
+            if (!Enum.IsDefined(typeof(StudentTable.Groups),Int32.Parse(group)))
             {
-                throw new Exception("Invalid group. Please enter a valid student group. ");
+                throw new ArgumentOutOfRangeException("Invalid group. Please enter a valid student group. ");
             }
 
             Name = name;
-            Grade = (StudentTable.Grades)grade;
-            _group = group;
+            Grade = (StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), grade);
+            _group = (StudentTable.Groups)Enum.Parse(typeof(StudentTable.Grades), group);
         }
 
         public void Upgrade()
@@ -43,8 +46,18 @@ namespace MathemathicsClass
 
         private void updateGrade(int level)
         {
-            int newGrade = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), ((char)Grade).ToString()) + level;
+            int newGrade = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), Grade.ToString()) + level;
             Grade = (StudentTable.Grades)(newGrade);
+            
         }
+
+        /*
+        private void nullChecker(Object[] inputs)
+        {
+            foreach (Object[] input in inputs)
+            {
+                //ArgumentNullException.ThrowIfNull(input.);
+            }
+        }*/
     }
 }
