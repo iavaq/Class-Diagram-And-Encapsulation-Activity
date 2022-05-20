@@ -45,6 +45,10 @@ namespace MathemathicsClass.Models
             updateGrade(-1);
         }
 
+        public Student GetStudentInfo()
+        {
+            return this;
+        }
         private void updateGrade(int level)
         {
             int newLevel = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), Grade.ToString()) + level;

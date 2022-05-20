@@ -1,4 +1,5 @@
 using FluentAssertions;
+using System.Text.Json;
 using MathemathicsClass.Models;
 
 namespace MathematicsClassTests
@@ -25,7 +26,7 @@ namespace MathematicsClassTests
             }
             Assert.Throws(typeof(ArgumentOutOfRangeException), CheckConstructor);
         }
-        
+
         [Test]
         public void Should_Throw_Exception_If_Group_Is_OutofRange()
         {
@@ -36,7 +37,7 @@ namespace MathematicsClassTests
 
             Assert.Throws(typeof(ArgumentOutOfRangeException), CheckConstructor);
         }
-        
+
         [Test]
         public void Should_Upgrade_Grade_To_A()
         {
@@ -71,6 +72,17 @@ namespace MathematicsClassTests
 
             student.Upgrade();
             student.Grade.Should().Be(StudentTable.Grades.A);
+        }
+
+        [Test]
+        public void Should_Not_Return_Group()
+        {
+            Student student = new Student("Lastname, Firstname", "A", "3");
+
+            string studentInfo = JsonSerializer.Serialize(student.GetStudentInfo());
+
+            Assert.IsFalse(studentInfo.Contains("group"));
+
         }
     }
 }
