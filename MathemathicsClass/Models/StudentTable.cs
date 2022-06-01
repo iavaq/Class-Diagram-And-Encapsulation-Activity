@@ -9,10 +9,11 @@ namespace MathemathicsClass.Models
 {
     public class StudentTable
     {
-        public enum Grades { F, E, D, C, B, A }
+        public enum Grades { none, F, E, D, C, B, A }
        
         public enum Groups
         {
+            none = 0,
             one = 1,
             two = 2,
             three = 3,

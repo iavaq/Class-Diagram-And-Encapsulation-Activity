@@ -15,17 +15,17 @@ namespace MathemathicsClass.Models
 
         public Student(string name, string grade, string group)
         {
-            if (nullChecker(name))
+            if (IsStringNull(name))
             {
                 throw new ArgumentNullException();
             }
 
-            if (!checkGradeRange(grade))
+            if (!CheckGradeRange(grade))
             {
                 throw new ArgumentOutOfRangeException();
             }
 
-            if (!checkGroupRange(group))
+            if (!CheckGroupRange(group))
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -37,23 +37,23 @@ namespace MathemathicsClass.Models
 
         public void Upgrade()
         {
-            updateGrade(1);
+            UpdateGrade(1);
         }
 
         public void Downgrade()
         {
-            updateGrade(-1);
+            UpdateGrade(-1);
         }
 
         public Student GetStudentInfo()
         {
             return this;
         }
-        private void updateGrade(int level)
+        private void UpdateGrade(int level)
         {
             int newLevel = (int)(StudentTable.Grades)Enum.Parse(typeof(StudentTable.Grades), Grade.ToString()) + level;
 
-            if (checkGradeRange(((StudentTable.Grades)newLevel).ToString()))
+            if (CheckGradeRange(((StudentTable.Grades)newLevel).ToString()))
             {
                 Grade = (StudentTable.Grades)newLevel;
             }
@@ -63,17 +63,17 @@ namespace MathemathicsClass.Models
             }
         }
 
-        private bool nullChecker(string input)
+        private bool IsStringNull(string input)
         {
             return string.IsNullOrEmpty(input.Trim());
 
         }
-        private bool checkGradeRange(string grade)
+        private bool CheckGradeRange(string grade)
         {
             return Enum.IsDefined(typeof(StudentTable.Grades), grade.ToUpper());
 
         }
-        private bool checkGroupRange(string group)
+        private bool CheckGroupRange(string group)
         {
             return Enum.IsDefined(typeof(StudentTable.Groups), int.Parse(group));
 
